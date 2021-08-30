@@ -5,5 +5,39 @@
 </ion-header>
 
 <ion-content>
+ 
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="crescent"></ion-refresher-content>
+      </ion-refresher>
+
+  <!-- List of Sliding Items dinamically displayed -->
+  <ion-list>
+    <ion-item-sliding *ngFor="let m of listEmails; let i = index">
+      <ion-item >
+        <ion-row >
+            <ion-col size="3">
+                <div>
+                  {{ m.from | slice:0:50 }}
+                </div>
+            </ion-col>
+            <ion-col size="7">
+                <div>
+                  {{ m.content | slice:0:150 }}
+                </div>
+            </ion-col>
+            <ion-col size="2">
+                <div>
+                  {{ m.date | slice:0:25 }}
+                </div>
+            </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item-options side="end" aria-setsize="5">
+        <ion-item-option (click)="delete(m,i)">Delete</ion-item-option>
+        <ion-item-option (click)="spam(item)">Spam</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
 
 </ion-content>
